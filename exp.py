@@ -1,48 +1,3 @@
-# BLENDED_LEARNING
-# Implementation of Ridge, Lasso, and ElasticNet Regularization for Predicting Car Price
-
-## AIM:
-To implement Ridge, Lasso, and ElasticNet regularization models using polynomial features and pipelines to predict car price.
-
-## Equipments Required:
-1. Hardware – PCs
-2. Anaconda – Python 3.7 Installation / Jupyter notebook
-
-## Algorithm
-1. **Import Libraries**:  
-   Import the required libraries.
-
-2. **Load Dataset**:  
-   Load the dataset into the environment.
-
-3. **Data Preprocessing**:  
-   Handle missing values and encode categorical variables.
-
-4. **Define Features and Target**:  
-   Split the dataset into features (X) and the target variable (y).
-
-5. **Create Polynomial Features**:  
-   Generate polynomial features from the data.
-
-6. **Set Up Pipelines**:  
-   Create pipelines for Ridge, Lasso, and ElasticNet models.
-
-7. **Train Models**:  
-   Fit each model to the training data.
-
-8. **Evaluate Model Performance**:  
-   Assess performance using the R² score and Mean Squared Error (MSE).
-
-9. **Compare Results**:  
-   Compare the performance of the models.
-
-## Program:
-```py
-/*
-Program to implement Ridge, Lasso, and ElasticNet regularization using pipelines.
-Developed by: Mohammed Saajid S
-RegisterNumber: 212223240093
-*/
 # Importing necessary libraries
 import pandas as pd
 import numpy as np
@@ -50,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge, Lasso, ElasticNet
-from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_squared_error, r2_score
 
@@ -64,6 +19,11 @@ data = pd.get_dummies(data, drop_first=True)
 # Splitting the data into features and target variable
 X = data.drop('price', axis=1)
 y = data['price']
+
+# Standardizing the features
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+y = scaler.fit_transform(y.values.reshape(-1, 1))
 
 # Splitting the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -130,13 +90,3 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-```
-
-## Output:
-
-![alt text](image-1.png)
-
-![alt text](image.png)
-
-## Result:
-Thus, Ridge, Lasso, and ElasticNet regularization models were implemented successfully to predict the car price and the model's performance was evaluated using R² score and Mean Squared Error.
